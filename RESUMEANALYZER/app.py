@@ -1,6 +1,10 @@
 # for running
 from flask import Flask, request, jsonify
+from preprocessing import extract_pdf_text, extract_contact_info
 import logging
+import fitz
+import sqlite3
+import re
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -8,6 +12,13 @@ app = Flask(__name__)
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Save the db
+def save_to_db(email, phone, linkedin, resume_text):
+    try:
+        conn = sqlite3.connect('resumes.db')
+    except Exception as e:
+        logger.error
 
 # Home route
 @app.route('/')
@@ -20,14 +31,27 @@ def home():
 def upload_resume():
     logger.info("Attempting to upload resume.")
     try:
-        file = request.files['resume']
+        file = request.files.get('resume')
         if not file:
             logger.warning("No file received in the request.")
             return jsonify({"error": "No file uploaded."}), 400
         
-        # Process the file (you can add the processing functions here)
-        logger.info(f"File {file.filename} uploaded successfully.")
-        return jsonify({"message": "Upload successful."}), 200
+        # temporaily save file
+        file_path = f"./uploads/{file.filename}"
+        file.save(file_path)
+
+        # extract resume text
+        resume_text = extract_pdf_text(file_path)
+        if not resume_text:
+            return jsonify ({"error": "Could not extract text from resume."}), 500
+
+        # extract contact info
+        contact_info = extract_contact_info(resume_text)
+
+        #save to db
+        save_to_db(contact_info["Email"], contact_info["Phone"], contact_info["LinkedIn"], resume_text)
+
+        return jsonify ({"message": "Resume processed successfully.", "data": contact_info}), 200
     
     except Exception as e:
         logger.error(f"Error during file upload: {str(e)}", exc_info=True)
