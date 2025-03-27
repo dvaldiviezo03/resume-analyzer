@@ -1,6 +1,7 @@
 # for running
 from flask import Flask, request, jsonify
 from preprocessing import extract_pdf_text, extract_contact_info
+from database import create_db
 import logging
 import fitz
 import sqlite3
@@ -17,8 +18,13 @@ logger = logging.getLogger(__name__)
 def save_to_db(email, phone, linkedin, resume_text):
     try:
         conn = sqlite3.connect('resumes.db')
+        c = conn.cursor()
+        c.execute('''INSERT INTO resumes (email, phone, linkedin, resume_text) 
+                     VALUES (?, ?, ?, ?)''', (email, phone, linkedin, resume_text))
+        conn.commit()
+        conn.close()
     except Exception as e:
-        logger.error
+        logger.error(f"Error saving to DB: {e}", exc_info=True)
 
 # Home route
 @app.route('/')
@@ -56,6 +62,9 @@ def upload_resume():
     except Exception as e:
         logger.error(f"Error during file upload: {str(e)}", exc_info=True)
         return jsonify({"error": "Internal server error."}), 500
+
+# initialize db
+create_db()
 
 if __name__ == '__main__':
     app.run(debug=True)
