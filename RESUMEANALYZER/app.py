@@ -48,6 +48,7 @@ def upload_resume():
 
         # extract resume text
         resume_text = extract_pdf_text(file_path)
+        logger.info(f"Extracted Resume Text:\n{resume_text}")
         if not resume_text:
             return jsonify ({"error": "Could not extract text from resume."}), 500
 

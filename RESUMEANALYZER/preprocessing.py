@@ -1,6 +1,5 @@
 import fitz
 import re
-import spacy
 
 def extract_pdf_text(pdf_path):
     doc = fitz.opn(pdf_path)
@@ -10,14 +9,14 @@ def extract_pdf_text(pdf_path):
     return text
 
 def extract_contact_info(text):
-    email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-    phone_pattern = r"\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}"
-    linkedin_pattern = r"https?://(www\.)?linkedin\.com/in/[a-zA-Z0-9_-]+" #tweak this
+    email_pattern = r"[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]+"
+    phone_pattern = r"(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(?\d{3}\)?|\d{3})(?:[.\-\s]*)\d{3}(?:[.\-\s]*)\d{4})"
+    linkedin_pattern = r"(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+"
 
     # use re.findall
     #re.findall() seraches a string or text, looks for substrings that match the regex, then returns it
 
-    email = re.findall(email_pattern, text)
+    email = re.findall(email_pattern, text) 
     phone = re.findall(phone_pattern, text)
     linkedin = re.findall(linkedin_pattern, text)
 
