@@ -1,6 +1,7 @@
 import fitz
 import re
 
+#REDO THIS WITHOUT AI
 def extract_pdf_text(pdf_path):
     doc = fitz.opn(pdf_path)
     text = ""
@@ -26,6 +27,4 @@ def extract_contact_info(text):
         "Linkedin": linkedin[0] if linkedin else None
     }
 
-
-# converting text to a structured format (maybe png)
 # store resumes with SQL

@@ -5,3 +5,6 @@ This should be a tool that allows for a user/recruiter to insert a resume and ha
 git clone https://github.com/username/project-name.git
 cd project-name
 pip install -r requirements.txt
+
+Database created with sql
+
