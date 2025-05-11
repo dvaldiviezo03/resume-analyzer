@@ -6,8 +6,9 @@ import logging
 import fitz
 import sqlite3
 import re
+import os
 
-# Initialize Flask app
+# this initializes flask peruse
 app = Flask(__name__)
 
 # Set up logging
@@ -37,11 +38,14 @@ def home():
 def upload_resume():
     logger.info("Attempting to upload resume.")
     try:
+
         file = request.files.get('resume')
         if not file:
             logger.warning("No file received in the request.")
             return jsonify({"error": "No file uploaded."}), 400
         
+        os.makedirs('./upload', ok_exist=True) #apparenatly creates directory when it doesnt exist yet
+                                               #CHECK BEFORE CONTUNING
         # temporaily save file
         file_path = f"./uploads/{file.filename}"
         file.save(file_path)

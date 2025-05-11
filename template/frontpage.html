@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f9fc;
+            background-color: #e1e6ec;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,10 +23,11 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 400px;
+            margin-right: 10%;
         }
 
         h1 {
-            color: #333;
+            color: #000000;
             margin-bottom: 1.5rem;
         }
 
@@ -34,7 +35,7 @@
             display: block;
             margin-bottom: 1rem;
             font-weight: bold;
-            color: #555;
+            color: #636060;
         }
 
         input[type="file"] {
@@ -43,7 +44,7 @@
         }
 
         button {
-            background-color: #007bff;
+            background-color: #0051ff;
             color: white;
             padding: 0.75rem 1.5rem;
             border: none;
@@ -64,9 +65,18 @@
             text-align: center;
             width: 400px;
         }
+
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            resize: vertical;
+            box-sizing: border-box;
+        }
     </style>
 </head>
-<!--fix oaste up jon descriptions-->
 
 <body>
     <div class="upload-container">
@@ -77,9 +87,13 @@
             <button type="submit">Upload</button>
         </form>
     </div>
+
     <div class="description-container">
-        <h1>Paste Job Description</h1>
-        <input type="text">
+        <h1>Job Description</h1>
+        <form action="/job-description" method="POST">
+            <textarea id="job-description" name="job-description" rows="10" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </body>
 
