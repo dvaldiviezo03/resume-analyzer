@@ -1,9 +1,8 @@
 import fitz
 import re
 
-#REDO THIS WITHOUT AI
 def extract_pdf_text(pdf_path):
-    doc = fitz.opn(pdf_path)
+    doc = fitz.open(pdf_path)
     text = ""
     for page in doc:
         text = text + page.get_text("text") + "\n" # extract text page by page
@@ -24,7 +23,7 @@ def extract_contact_info(text):
     return {
         "Email": email[0] if email else None,
         "Phone": phone[0] if phone else None,
-        "Linkedin": linkedin[0] if linkedin else None
+        "LinkedIn": linkedin[0] if linkedin else None
     }
 
 # store resumes with SQL

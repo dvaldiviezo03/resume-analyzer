@@ -1,0 +1,4 @@
+__pycache__/
+
+# ignore uploaded resumes
+/upload/
