@@ -2,3 +2,5 @@ __pycache__/
 
 # ignore uploaded resumes
 /upload/
+
+resumes.db/

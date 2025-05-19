@@ -44,8 +44,8 @@ def upload_resume():
             logger.warning("No file received in the request.")
             return jsonify({"error": "No file uploaded."}), 400
         
-        os.makedirs('./upload', exist_ok=True) #apparenatly creates directory when it doesnt exist yet
-                                              #CHECK BEFORE CONTUNING
+        os.makedirs('./upload', exist_ok=True) #creates directory when it doesnt exist yet
+                                        
         # temporaily save file
         file_path = f"./upload/{file.filename}"
         file.save(file_path)
