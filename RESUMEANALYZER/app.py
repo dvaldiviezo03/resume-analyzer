@@ -1,5 +1,5 @@
 # for running
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from preprocessing import extract_pdf_text, extract_contact_info
 from database import create_db
 import logging
@@ -31,7 +31,7 @@ def save_to_db(email, phone, linkedin, resume_text):
 @app.route('/')
 def home():
     logger.info("Home route accessed.")
-    return "Resume Tool is running."
+    return render_template('frontpage.html')
 
 # Upload route
 @app.route('/upload', methods=['POST'])
