@@ -44,6 +44,11 @@ def upload_resume():
             logger.warning("No file received in the request.")
             return jsonify({"error": "No file uploaded."}), 400
         
+        job_description = request.form.get('job_description', '').strip()
+        if not job_description:
+            logger.warning("No job description given.")
+            return jsonify({"error": "No job description given."}), 400
+
         os.makedirs('./upload', exist_ok=True) #creates directory when it doesnt exist yet
                                         
         # temporaily save file
