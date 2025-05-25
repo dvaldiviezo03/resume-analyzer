@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, jsonify
 from preprocessing import extract_pdf_text, extract_contact_info
 from database import create_db
+from ai_module import compare_texts
 import logging
 import fitz
 import sqlite3
@@ -43,7 +44,7 @@ def upload_resume():
         if not file:
             logger.warning("No file received in the request.")
             return jsonify({"error": "No file uploaded."}), 400
-        
+        # form from the html file
         job_description = request.form.get('job_description', '').strip()
         if not job_description:
             logger.warning("No job description given.")
@@ -64,10 +65,15 @@ def upload_resume():
         # extract contact info
         contact_info = extract_contact_info(resume_text)
 
+        # module import
+        match_result = compare_texts(resume_text, job_description)
+        
         #save to db
         save_to_db(contact_info["Email"], contact_info["Phone"], contact_info["LinkedIn"], resume_text)
 
-        return jsonify ({"message": "Resume processed successfully.", "data": contact_info}), 200
+        return jsonify ({"message": "Resume processed successfully.", 
+                         "data": contact_info,
+                         "match_result": match_result}), 200
     
     except Exception as e:
         logger.error(f"Error during file upload: {str(e)}", exc_info=True)

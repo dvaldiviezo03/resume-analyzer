@@ -1,5 +1,4 @@
 import sqlite3
-#REDO WITHOUT AI
 
 # connects me to sql
 def create_db():
