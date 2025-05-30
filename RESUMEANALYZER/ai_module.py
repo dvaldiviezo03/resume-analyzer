@@ -9,7 +9,7 @@ def compare_texts(resume_text, job_description):
     #embeddings are used for the compuyter to understand the text better
     #convert to tensor is good for similirarity stuff
     embeddings = model.encode([resume_text, job_description], convert_to_tensor=True)
-
+    
     similarity_score = util.pytorch_cos_sim(embeddings[0], embeddings[1]).item()
 
     return {
