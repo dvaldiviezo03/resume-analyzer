@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Analysis Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .result-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0051ff;
+            margin-bottom: 1.5rem;
+        }
+
+        .score {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: black;
+            margin-bottom: pre-line;
+        }
+
+        .suggestions {
+            font-size: 1rem;
+            color: rgb(79, 75, 75);
+            white-space: pre-line;
+        }
+
+        .back-link {
+            margin-top: 2rem;
+            display: inline-block;
+            text-decoration: none;
+            color: #0051ff;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result-box">
+        <h1>Results</h1>
+        <div class="score">Match Score: {{ score }}</div>
+        <div class="suggestions">{{ suggestions }}</div>
+    </div>
+</body>
+
+</html>

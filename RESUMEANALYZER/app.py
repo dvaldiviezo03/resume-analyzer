@@ -71,9 +71,7 @@ def upload_resume():
         #save to db
         save_to_db(contact_info["Email"], contact_info["Phone"], contact_info["LinkedIn"], resume_text)
 
-        return jsonify ({"message": "Resume processed successfully.", 
-                         "data": contact_info,
-                         "match_result": match_result}), 200
+        return render_template('results.html', match_result=match_result)
     
     except Exception as e:
         logger.error(f"Error during file upload: {str(e)}", exc_info=True)
