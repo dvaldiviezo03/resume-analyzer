@@ -1,20 +1,20 @@
-# handles ai processing
+import openai
 from sentence_transformers import SentenceTransformer, util
 
-# load pre-trained model
+# mini lm nit llm
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+openai.api_keu = "YOUR_API_KEY"
 
 def compare_texts(resume_text, job_description):
 
     #embeddings are used for the compuyter to understand the text better
     #convert to tensor is good for similirarity stuff
     embeddings = model.encode([resume_text, job_description], convert_to_tensor=True)
-    
     similarity_score = util.pytorch_cos_sim(embeddings[0], embeddings[1]).item()
 
     return {
-        "similarity_score": similarity_score,
-        "match": interpret_score(similarity_score)
+        "similarity_score": round(similarity_score, 2),
+        "match": interpret_score(similarity_score),
     }
 
 def interpret_score(score):
@@ -24,3 +24,26 @@ def interpret_score(score):
         return "Moderate Match"
     else:
         return "Weak Match"
+
+def gen_feedback(resume_text, job_description):
+    prompt = f"""
+    You are a resume analysis assistant. Based on the following resume and job description, provide specific, constructive
+    feedback to improve the resume. Be helpful and professional.
+
+    Resume:
+    \"\"\"{resume_text}\"\"\"
+
+    Job description:
+    \"\"\"{job_description}\"\"\"
+
+    Respond with:
+    1. Key mismatches or missing skills
+    2. Suggestions for improvement
+    3. Tone or formatting tips if relevant
+    """
+        response = openai.ChatCompletion.create(
+            model = "gpt-4",
+            messages = [{"role": "user", "content": prompt}],
+            max_tokens = 300
+        )
+        return response.choices[0].message['content'],strip()
