@@ -73,7 +73,7 @@ def upload_resume():
 
         return render_template('results.html', 
                                score=match_result["similarity_score"], 
-                               suggestions=match_result["match"], 
+                               match=match_result["match"], 
                                feedback=detailed_feedback)
     
     except Exception as e:
@@ -81,7 +81,9 @@ def upload_resume():
         return jsonify({"error": "Internal server error."}), 500
 
 # initialize db
-create_db()
-
+try:
+    create_db()
+except Exception as e:
+    logger.error(f"DB initialization failed: {e}", exc_info=True)
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)

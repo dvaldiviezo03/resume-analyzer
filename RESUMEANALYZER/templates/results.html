@@ -69,8 +69,9 @@
     <div class="result-box">
         <h1>Results</h1>
         <div class="score">Match Score: {{ score }}</div>
+        <dic class="score">Match Level: {{ match }}</dic>
         <div class="suggestions"><strong>Feedback: </strong></div>
-        <div class="suggestion-box">{{ suggestions | safe }}</div>
+        <div class="suggestion-box">{{ feedback | safe }}</div>
     </div>
 </body>
 

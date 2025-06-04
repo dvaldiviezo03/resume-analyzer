@@ -1,18 +1,22 @@
+from functools import lru_cache
 import openai
 import os
 from sentence_transformers import SentenceTransformer, util
 from dotenv import load_dotenv
 
 load_dotenv()
-
-# mini lm nit llm
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+@lru_cache(maxsize=1)
+def get_model():
+    # mini lm not llm
+    return SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 def compare_texts(resume_text, job_description):
 
     #embeddings are used for the compuyter to understand the text better
     #convert to tensor is good for similirarity stuff
+    model = get_model()
     embeddings = model.encode([resume_text, job_description], convert_to_tensor=True)
     similarity_score = util.pytorch_cos_sim(embeddings[0], embeddings[1]).item()
 
