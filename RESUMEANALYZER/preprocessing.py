@@ -25,5 +25,3 @@ def extract_contact_info(text):
         "Phone": phone[0] if phone else None,
         "LinkedIn": linkedin[0] if linkedin else None
     }
-
-# store resumes with SQL

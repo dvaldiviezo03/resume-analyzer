@@ -10,8 +10,8 @@
             font-family: Arial, sans-serif;
             background-color: #e1e6ec;
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
             padding: 2rem;
@@ -75,6 +75,26 @@
 
         button:hover {
             background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: colum;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            form {
+                width: 100%;
+                align-items: center;
+            }
+
+            .upload-container,
+            .description-container,
+            .result-container {
+                width: 90%;
+                max-width: 500px;
+            }
         }
     </style>
 </head>

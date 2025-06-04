@@ -33,7 +33,7 @@
             font-size: 1.25rem;
             font-weight: bold;
             color: black;
-            margin-bottom: pre-line;
+            margin-bottom: 1.5rem;
         }
 
         .suggestions {
@@ -53,6 +53,15 @@
         .back-link:hover {
             text-decoration: underline;
         }
+
+        .suggestion-box {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: left;
+        }
     </style>
 </head>
 
@@ -60,7 +69,8 @@
     <div class="result-box">
         <h1>Results</h1>
         <div class="score">Match Score: {{ score }}</div>
-        <div class="suggestions">{{ suggestions }}</div>
+        <div class="suggestions"><strong>Feedback: </strong></div>
+        <div class="suggestion-box">{{ suggestions | safe }}</div>
     </div>
 </body>
 

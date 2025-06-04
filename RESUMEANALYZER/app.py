@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, jsonify
 from preprocessing import extract_pdf_text, extract_contact_info
 from database import create_db
-from ai_module import compare_texts
+from ai_module import compare_texts, gen_feedback
 import logging
 import fitz
 import sqlite3
@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # Save the db
@@ -65,13 +65,16 @@ def upload_resume():
         # extract contact info
         contact_info = extract_contact_info(resume_text)
 
-        # module import
         match_result = compare_texts(resume_text, job_description)
+        detailed_feedback = gen_feedback(resume_text, job_description)
         
         #save to db
         save_to_db(contact_info["Email"], contact_info["Phone"], contact_info["LinkedIn"], resume_text)
 
-        return render_template('results.html', match_result=match_result)
+        return render_template('results.html', 
+                               score=match_result["similarity_score"], 
+                               suggestions=match_result["match"], 
+                               feedback=detailed_feedback)
     
     except Exception as e:
         logger.error(f"Error during file upload: {str(e)}", exc_info=True)
@@ -81,4 +84,4 @@ def upload_resume():
 create_db()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
