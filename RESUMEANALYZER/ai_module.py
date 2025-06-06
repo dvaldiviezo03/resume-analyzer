@@ -4,8 +4,6 @@ import os
 from sentence_transformers import SentenceTransformer, util
 from dotenv import load_dotenv
 
-print("AI module being loaded...")
-
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 

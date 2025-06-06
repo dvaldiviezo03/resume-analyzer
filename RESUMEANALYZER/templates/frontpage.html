@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e1e6ec;
+            background-color: rgba(210, 210, 210, 0.507);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,7 +63,7 @@
         }
 
         button {
-            background-color: #0051ff;
+            background-color: #74A662;
             color: white;
             padding: 0.75rem 1.5rem;
             border: none;
@@ -74,7 +74,7 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #2f6330;
         }
 
         @media (max-width: 768px) {
@@ -95,6 +95,16 @@
                 width: 90%;
                 max-width: 500px;
             }
+        }
+
+        .green-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100vh;
+            background-color: #74A662;
+            z-index: 0;
         }
     </style>
 </head>
@@ -123,6 +133,8 @@
             </div>
         </div>
     </form>
+
+    <div class="green-bar"></div>
 
 </body>
 

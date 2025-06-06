@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
+            background-color: rgba(210, 210, 210, 0.507);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,7 +25,7 @@
         }
 
         h1 {
-            color: #0051ff;
+            color: #74A662;
             margin-bottom: 1.5rem;
         }
 
@@ -61,6 +61,19 @@
             border-radius: 8px;
             margin-top: 1rem;
             text-align: left;
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            z-index: 1;
+        }
+
+        .green-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100vh;
+            background-color: #74A662;
+            z-index: 0;
         }
     </style>
 </head>
@@ -71,8 +84,9 @@
         <div class="score">Match Score: {{ score }}</div>
         <dic class="score">Match Level: {{ match }}</dic>
         <div class="suggestions"><strong>Feedback: </strong></div>
-        <div class="suggestion-box">{{ feedback | safe }}</div>
+        <pre class="suggestion-box">{{ feedback }}</pre>
     </div>
+    <div class="green-bar"></div>
 </body>
 
 </html>

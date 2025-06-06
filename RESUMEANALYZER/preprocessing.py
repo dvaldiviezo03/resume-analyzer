@@ -13,7 +13,6 @@ def extract_contact_info(text):
     phone_pattern = r"(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(?\d{3}\)?|\d{3})(?:[.\-\s]*)\d{3}(?:[.\-\s]*)\d{4})"
     linkedin_pattern = r"(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+"
 
-    # use re.findall
     #re.findall() seraches a string or text, looks for substrings that match the regex, then returns it
 
     email = re.findall(email_pattern, text) 

@@ -2,13 +2,13 @@
 from flask import Flask, render_template, request, jsonify
 from preprocessing import extract_pdf_text, extract_contact_info
 from database import create_db
-from ai_module import compare_texts, gen_feedback
+from ai_module import compare_texts, gen_feedback 
 import logging
 import fitz
 import sqlite3
 import re
 import os
-print("app.py starting...")
+
 # this initializes flask peruse
 app = Flask(__name__)
 
