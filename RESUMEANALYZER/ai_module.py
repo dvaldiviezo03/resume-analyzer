@@ -1,19 +1,21 @@
 from functools import lru_cache
-import openai
+from openai import OpenAI
 import os
 from sentence_transformers import SentenceTransformer, util
 from dotenv import load_dotenv
 
+print("AI module being loaded...")
+
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @lru_cache(maxsize=1)
+
 def get_model():
     # mini lm not llm
     return SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 def compare_texts(resume_text, job_description):
-
     #embeddings are used for the compuyter to understand the text better
     #convert to tensor is good for similirarity stuff
     model = get_model()
@@ -34,6 +36,7 @@ def interpret_score(score):
         return "Weak Match"
 
 def gen_feedback(resume_text, job_description):
+    print("Prompt sent to ai...")
     prompt = f"""
     You are a resume analysis assistant. Based on the following resume and job description, provide specific, constructive
     feedback to improve the resume. Be helpful and professional.
@@ -51,13 +54,16 @@ def gen_feedback(resume_text, job_description):
     """
     
     try:
-        response = openai.ChatCompletion.create(
+        print("Prompt sent to openai...")
+        response = client.chat.completions.create(
             model = "gpt-3.5-turbo",
             messages = [{"role": "user", "content": prompt}],
             temperature = 0.7,
             max_tokens = 300,
-            request_timeout = 15
+            timeout = 15
         )
-        return response.choices[0].message['content'].strip()
+        print("Openai response received...")
+        return response.choices[0].message.content
     except Exception as e:
+        print(f"Error in gen_feedback: {str(e)}")
         return f"Error generating feedback: {str(e)}"

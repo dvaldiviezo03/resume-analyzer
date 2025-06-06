@@ -8,7 +8,7 @@ import fitz
 import sqlite3
 import re
 import os
-
+print("app.py starting...")
 # this initializes flask peruse
 app = Flask(__name__)
 
@@ -31,12 +31,14 @@ def save_to_db(email, phone, linkedin, resume_text):
 # Home route
 @app.route('/')
 def home():
+    print("Home route hit...")
     logger.info("Home route accessed.")
     return render_template('frontpage.html')
 
 # Upload route
 @app.route('/upload', methods=['POST'])
 def upload_resume():
+    print("Upload routee hit....")
     logger.info("Attempting to upload resume.")
     try:
 
@@ -85,5 +87,7 @@ try:
     create_db()
 except Exception as e:
     logger.error(f"DB initialization failed: {e}", exc_info=True)
+
 if __name__ == '__main__':
+    print("Starting flask app...")
     app.run(debug=True, use_reloader=False)
