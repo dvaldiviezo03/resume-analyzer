@@ -52,7 +52,6 @@ def gen_feedback(resume_text, job_description):
     """
     
     try:
-        print("Prompt sent to openai...")
         response = client.chat.completions.create(
             model = "gpt-3.5-turbo",
             messages = [{"role": "user", "content": prompt}],

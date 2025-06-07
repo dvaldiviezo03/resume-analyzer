@@ -1,10 +1,22 @@
 # resume-analyzer
-This should be a tool that allows for a user/recruiter to insert a resume and have it screened.
+A Flask web application that analyzes resumes against job descriptions using OpenAI's API and gives ai feedback.
+
+# features
+- Upload PDF resume
+- Exctracts contact info(email, phone, Linkedln)
+- Matches resume to job description using NLP
+- Generates personalized bullet-point feedback using AI
+- Stores daat in SQLite
+- Clean, responsive UI with Flask and HTML/CSS
+
+# tech stack
+- Python
+- Flask
+- SQLite3
+- OpenAI API
+- PyMuPDF (from 'fitz')
+- HTML/CSS
 
 # installation
-git clone https://github.com/username/project-name.git
-cd project-name
-pip install -r requirements.txt
-
-Database created with sql
-
+git clone https://github.com/username/resume-analyzer.git
+cd resume-analyzer
