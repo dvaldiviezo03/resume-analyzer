@@ -17,6 +17,17 @@ A Flask web application that analyzes resumes against job descriptions using Ope
 - PyMuPDF (from 'fitz')
 - HTML/CSS
 
+# what I learned
+- Implmenting openAI API
+- Integrating NLP sentence transformers model for sentecne comparison
+- Database creation using python's SQL library
+- Frontend div uses and css styling
+
+# what could be imporved
+- Runtime issues, the program is slow to start up and slow to analyze. It could be reworked in the future for better time complexity.
+- Newer more visually appealing UX design. Is an easy fix but works nonetheless.
+- File type upload. Right now only PDF files are accepted to eb analyzed, but a future update could allow for all types of files to be parced. 
+
 # installation
 git clone https://github.com/username/resume-analyzer.git
 cd resume-analyzer
