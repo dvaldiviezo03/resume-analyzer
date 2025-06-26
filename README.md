@@ -8,6 +8,9 @@ A Flask web application that analyzes resumes against job descriptions using Ope
 - Generates personalized bullet-point feedback using AI
 - Stores daat in SQLite
 - Clean, responsive UI with Flask and HTML/CSS
+- Deployed to AWS EC2 instance with Nginx reverse proxy and Gunicorn as WSGI server
+- Configured systemd service to ensure persistent background process
+- Used environment variables for secure API key handling via .env
 
 # tech stack
 - Python
