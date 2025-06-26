@@ -30,4 +30,13 @@ A Flask web application that analyzes resumes against job descriptions using Ope
 
 # installation
 git clone https://github.com/username/resume-analyzer.git
-cd resume-analyzer
+cd resume-analyzer/RESUMEANALYZER
+python -m venv venv
+sorce venv/bin/activate
+pip install -r requirements.txt
+
+# create .env file in root directory and add your OpenAI key like so
+OPENAI_API_KEY = your_api_key
+
+# then run
+python app.py
